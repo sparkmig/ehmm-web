@@ -1,36 +1,35 @@
-import { createFileRoute } from '@tanstack/react-router'
-import logo from '../logo.svg'
-import '../App.css'
+import { createFileRoute } from "@tanstack/react-router";
+import "../App.css";
+import {
+  Button,
+  Input,
+  Label,
+  type InputOnChangeData,
+} from "@fluentui/react-components";
+import { useState } from "react";
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: App,
-})
+});
 
 function App() {
+  const [text, setText] = useState<string>("");
+
+  function handleInputChange(
+    _: React.ChangeEvent<HTMLInputElement>,
+    data: InputOnChangeData,
+  ) {
+    setText(data.value);
+  }
+  function showAlert() {
+    alert(text);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <a
-          className="App-link"
-          href="https://tanstack.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn TanStack
-        </a>
-      </header>
+    <div style={{ display: "flex", flexDirection: "column", maxWidth: 300 }}>
+      <Label>Dialogtext</Label>
+      <Input onChange={handleInputChange}></Input>
+      <br></br>
+      <Button onClick={showAlert}>KISS HUSBAND</Button>
     </div>
-  )
+  );
 }
